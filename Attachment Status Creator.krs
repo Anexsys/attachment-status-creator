@@ -1,0 +1,57 @@
+<script>
+	<name>Attachment Status Creator</name>
+	<description>Generate an attachment status (Parent, Parent and Child, Child, Freestanding) from the family information selected where the attachment status field is not already set</description>
+	<category>Data Manipulation</category>
+	<input orientation="horizontal">
+		<field id="docID" name="Document ID">
+			<filters>
+				<category>2</category>
+			</filters>
+		</field>
+		<field id="groupID" name="Group ID">
+			<filters>
+				<category>5</category>
+			</filters>
+		</field>
+		<field id="attID" name="Attached To">
+			<filters>
+				<type>0</type>
+			</filters>
+		</field>
+		<field id="attStatus" name="Attachment/Relationship Status">
+			<filters>
+				<type>0</type>
+			</filters>
+		</field>
+	</input>
+	<display type="itemlist" />
+	<action timeout="3600" returns="table"><![CDATA[
+
+
+--Update Attachment Status
+UPDATE EDDSDBO.Document
+SET #attStatus# = 'Parent'
+WHERE #docID# = #groupID#
+AND #docID# IN (
+SELECT #groupID# FROM EDDSDBO.Document WHERE #groupID# <> #docID#)
+AND #attStatus# IS NULL
+
+UPDATE EDDSDBO.Document
+SET #attStatus# = 'Freestanding'
+WHERE #docID# = #groupID#
+AND #attStatus# IS NULL
+
+UPDATE EDDSDBO.Document
+SET #attStatus# = 'Parent and Child'
+WHERE #docID# <> #groupID#
+AND #docID# IN (SELECT #attID# FROM EDDSDBO.Document)
+AND #attStatus# IS NULL
+
+UPDATE EDDSDBO.Document
+SET #attStatus# = 'Child'
+WHERE #attStatus# IS NULL
+
+	
+
+	]]></action>
+</script>
