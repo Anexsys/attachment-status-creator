@@ -6,4 +6,4 @@ While this is an open source project on the kCura GitHub account, support is onl
 # Project Champion 
 ![Anexsys](http://anexsys.com/wp-content/uploads/2017/01/Anexsys-Green-small.png "Anexsys")
 
-[Anexsys](http://language.ai/) is a major contributor to this project.  If you are interested in having modifications made to this project, please reach out to [Anexsys](http://anexsys.com/) for an estimate. 
+[Anexsys](http://anexsys.com/) is a major contributor to this project.  If you are interested in having modifications made to this project, please reach out to [Anexsys](http://anexsys.com/) for an estimate. 
